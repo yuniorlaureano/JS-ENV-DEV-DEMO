@@ -1,4 +1,11 @@
 import './index.css';
+import { getUsers } from './api/userApi';
 
-const b = "asdf";
-console.log(b);
+getUsers().then(result => {
+    let usersBody = "";
+    result.forEach(user => {
+        usersBody += "<tr>" + user.firstName + "</tr>"
+    });
+
+    global.document.getElementById('users').innerHTML = usersBody;
+});

@@ -1,20 +1,14 @@
 import express from 'express';
 import path from 'path';
 import open from 'open';
-import webpack from 'webpack';
-import config from '../webpack.config.dev';
 
 var port = 3000;
 var app = express();
-const compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
+app.use(express.static('dist'));
 
 app.get('/', function(req, resp) {
-    resp.sendFile(path.join(__dirname, '../src/index.html'));
+    resp.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.get('/users', function(req, res) {
